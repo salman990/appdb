@@ -19,6 +19,7 @@ CREATE TABLE public.menu_items
     id int NOT NULL DEFAULT nextval('menu_items_id_seq') PRIMARY KEY,
     name varchar(200) NOT NULL UNIQUE,
     description varchar(200),
-	menu_category_id	int,
+    menu_category_id	int,
+    CONSTRAINT menu_items_fk Foreign Key (menu_category_id ) REFERENCES menu_categories(id)
 	
 );
