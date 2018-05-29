@@ -1,5 +1,6 @@
-DROP SEQUENCE IF EXISTS public.restaurants_cuisines_id_seq CASCADE;
-DROP TABLE IF EXISTS public.restaurantcuisinetypes CASCADE;
+DROP TABLE IF EXISTS public.menu_item_details;
+DROP TABLE IF EXISTS  public.menu_items;
+DROP TABLE IF EXISTS  public.menu_categories;
 
 CREATE SEQUENCE IF NOT EXISTS public.menu_categories_id_seq; 
 CREATE TABLE public.menu_categories
@@ -18,8 +19,24 @@ CREATE TABLE public.menu_items
 (
     id int NOT NULL DEFAULT nextval('menu_items_id_seq') PRIMARY KEY,
     name varchar(200) NOT NULL UNIQUE,
-    description varchar(200),
-    menu_category_id	int,
-    CONSTRAINT menu_items_fk Foreign Key (menu_category_id ) REFERENCES menu_categories(id)
-	
+    description1 varchar(200),
+	description2 varchar(200),
+	price decimal(8,2),
+	menu_category_id int,
+	CONSTRAINT menu_items_fk Foreign Key (menu_category_id ) REFERENCES menu_categories(id)
 );
+
+CREATE SEQUENCE IF NOT EXISTS public.menu_item_details_id_seq; 
+CREATE TABLE public.menu_item_details
+(
+    id int NOT NULL DEFAULT nextval('menu_item_details_id_seq') PRIMARY KEY,
+    group_id smallint NOT NULL,
+	name varchar(200) NOT NULL,
+    description1 varchar(200),
+	description2 varchar(200),
+	menu_item_id int,
+	CONSTRAINT menu_item_details_fk Foreign Key (menu_item_id ) REFERENCES menu_items(id)
+);
+
+
+
